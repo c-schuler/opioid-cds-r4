@@ -13,4 +13,6 @@ jobs:
       - name: Install Publisher
         run: ./_updatePublisher.sh -f -y
       - name: Build IG
+        env:
+          DEFAULT_JVM_OPTS: "-Xmx16g -Xms16g"
         run: ./_genonce.sh
