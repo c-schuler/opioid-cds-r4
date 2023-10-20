@@ -14,5 +14,5 @@ jobs:
         run: ./_updatePublisher.sh -f -y
       - name: Build IG
         env:
-          DEFAULT_JVM_OPTS: "-Xmx16g -Xms16g"
+          DEFAULT_JVM_OPTS: "-Xmx7g -Xms7g"
         run: ./_genonce.sh
