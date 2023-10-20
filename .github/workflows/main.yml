@@ -1,0 +1,16 @@
+on: 
+  pull_request:
+    types:
+      - opened
+    branches: master
+
+jobs:
+  build_ig:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install Publisher
+        run: ./_updatePublisher.sh -f -y
+      - name: Build IG
+        run: ./_genonce.sh
