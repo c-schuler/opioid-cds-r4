@@ -15,8 +15,6 @@ FORCE=false
 
 dlurl='https://oss.sonatype.org/service/local/artifact/maven/redirect?r='${r}'&g='${g}'&a='${a}'&v='${v}''
 
-echo ${dlurl}
-
 input_cache_path=./input-cache/
 # tooling_jar=tooling-1.4.1-SNAPSHOT-jar-with-dependencies.jar
 tooling_jar=tooling-cli-2.1.0-SNAPSHOT.jar
@@ -56,8 +54,8 @@ else
 	fi
 fi
 
-if [[$FORCE == false]] ; then 
-	if [[$upgrade == true]] ; then
+if [ $FORCE == false ] ; then 
+	if [ $upgrade == true ] ; then
 		message="Overwrite $jarlocation? [Y/N] "
 	else
 		echo Will place tooling jar here: $jarlocation
