@@ -16,6 +16,6 @@ jobs:
       # - name: Build IG
       #   run: ./_genonce.sh
       - name: Install Tooling Jar
-        run: ./_updateCQFTooling.sh
+        run: ./_updateCQFTooling.sh -f
       - name: Refresh Test Data
         run: ./_refreshTestData.sh
