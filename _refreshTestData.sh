@@ -1,10 +1,8 @@
 #!/bin/bash
-#DO NOT EDIT WITH WINDOWS
 tooling_jar=tooling-cli-2.1.0-SNAPSHOT.jar
-# tooling_jar=tooling-1.4.1-SNAPSHOT-jar-with-dependencies.jar
-input_cache_path=$PWD/input-cache
-patient_data_bundles=$PWD/input/examples
-service_requests=$PWD/input/pagecontent/requests
+input_cache_path=./input-cache
+patient_data_bundles=./input/examples
+service_requests=./input/pagecontent/requests
 
 echo Refreshing Test Data...
 
