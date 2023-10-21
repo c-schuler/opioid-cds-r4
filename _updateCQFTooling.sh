@@ -1,23 +1,12 @@
 #!/bin/bash
-
 r=snapshots
 g=org.opencds.cqf
-# a=tooling
-# v=1.4.1-SNAPSHOT
-# c=jar-with-dependencies
-
-# dlurl='https://oss.sonatype.org/service/local/artifact/maven/redirect?r='${r}'&g='${g}'&a='${a}'&v='${v}'&c='${c}''
-
 a=tooling-cli
 v=2.1.0-SNAPSHOT
-
-FORCE=false
-
 dlurl='https://oss.sonatype.org/service/local/artifact/maven/redirect?r='${r}'&g='${g}'&a='${a}'&v='${v}''
-
 input_cache_path=$PWD/input-cache/
-# tooling_jar=tooling-1.4.1-SNAPSHOT-jar-with-dependencies.jar
 tooling_jar=tooling-cli-2.1.0-SNAPSHOT.jar
+FORCE=false
 
 if ! type "curl" > /dev/null; then
 	echo "ERROR: Script needs curl to download latest IG Tooling. Please install curl."
