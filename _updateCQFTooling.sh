@@ -1,6 +1,4 @@
 #!/bin/bash
-#DO NOT EDIT WITH WINDOWS
-#exit 1
 
 r=snapshots
 g=org.opencds.cqf
