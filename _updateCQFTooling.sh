@@ -57,7 +57,7 @@ else
 fi
 
 if [[ "$response" =~ ^([yY])$ ]]; then
-	echo "Downloading most recent tooling to $jarlocationname - it's ~170 MB, so this may take a bit"
+	echo "Downloading most recent tooling to $jarlocation - it's ~170 MB, so this may take a bit"
 	curl $dlurl -L -o "$jarlocation" --create-dirs
 	echo "Download complete."
 else
