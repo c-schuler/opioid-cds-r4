@@ -9,12 +9,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Install Publisher
-        run: ./_updatePublisher.sh -f -y
-      - name: Install Jekyll
-        run: gem install jekyll
-      - name: Build IG
-        run: ./_genonce.sh
+      # - name: Install Publisher
+      #   run: ./_updatePublisher.sh -f -y
+      # - name: Install Jekyll
+      #   run: gem install jekyll
+      # - name: Build IG
+      #   run: ./_genonce.sh
       - name: Install Tooling Jar
         run: ./_updateCQFTooling.sh -f
       - name: Refresh Test Data
