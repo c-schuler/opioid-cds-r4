@@ -19,3 +19,12 @@ jobs:
         run: ./_updateCQFTooling.sh -f
       - name: Refresh Test Data
         run: ./_refreshTestData.sh
+  start_ruler:
+    runs-on: ubuntu-latest
+    services:
+      nginx:
+        image: nginx
+        ports:
+          - 8080:80
+      ruler:
+        image: cschuler72/cqf-ruler
