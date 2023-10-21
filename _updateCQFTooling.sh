@@ -6,6 +6,7 @@ v=2.1.0-SNAPSHOT
 dlurl='https://oss.sonatype.org/service/local/artifact/maven/redirect?r='${r}'&g='${g}'&a='${a}'&v='${v}''
 input_cache_path=$PWD/input-cache/
 tooling_jar=tooling-cli-2.1.0-SNAPSHOT.jar
+
 FORCE=false
 
 if ! type "curl" > /dev/null; then
