@@ -21,7 +21,6 @@ input_cache_path=./input-cache/
 # tooling_jar=tooling-1.4.1-SNAPSHOT-jar-with-dependencies.jar
 tooling_jar=tooling-cli-2.1.0-SNAPSHOT.jar
 
-set -e
 if ! type "curl" > /dev/null; then
 	echo "ERROR: Script needs curl to download latest IG Tooling. Please install curl."
 	exit 1
