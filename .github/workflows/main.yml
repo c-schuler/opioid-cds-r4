@@ -28,3 +28,6 @@ jobs:
           - 8080:80
       ruler:
         image: cschuler72/cqf-ruler
+    steps:
+      - name: Install Publisher
+        run: ./_updatePublisher.sh -f -y
