@@ -13,6 +13,8 @@ g=org.opencds.cqf
 a=tooling-cli
 v=2.1.0-SNAPSHOT
 
+FORCE=false
+
 dlurl='https://oss.sonatype.org/service/local/artifact/maven/redirect?r='${r}'&g='${g}'&a='${a}'&v='${v}''
 
 echo ${dlurl}
@@ -26,6 +28,14 @@ if ! type "curl" > /dev/null; then
 	echo "ERROR: Script needs curl to download latest IG Tooling. Please install curl."
 	exit 1
 fi
+
+while [ "$#" -gt 0 ]; do
+    case $1 in
+    -f|--force)  FORCE=true ;;
+    *)  echo "Unknown parameter passed: $1.  Exiting"; exit 1 ;;
+    esac
+    shift
+done
 
 tooling="$input_cache_path$tooling_jar"
 if test -f "$tooling"; then
@@ -49,15 +59,18 @@ else
 	fi
 fi
 
-if $upgrade ; then
-	message="Overwrite $jarlocation? [Y/N] "
+if [[$FORCE == false]] ; then 
+	if [[$upgrade == true]] ; then
+		message="Overwrite $jarlocation? [Y/N] "
+	else
+		echo Will place tooling jar here: $jarlocation
+		message="Ok? [Y/N]"
+		read -r -p "$message" response
+	fi
 else
-	#echo Will place tooling jar here: $input_cache_path$tooling_jar
-	echo Will place tooling jar here: $jarlocation
-	message="Ok? [Y/N]"
+  response=y
 fi
 
-read -r -p "$message" response
 if [[ "$response" =~ ^([yY])$ ]]; then
 	echo "Downloading most recent tooling to $jarlocationname - it's ~170 MB, so this may take a bit"
 	curl $dlurl -L -o "$jarlocation" --create-dirs
