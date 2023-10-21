@@ -1,18 +1,21 @@
 on: 
   pull_request:
-    types:
-      - opened
+    types: [opened, edited, reopened]
     branches: master
 
 jobs:
   build_ig:
-    runs-on: ubuntu-latest
+    runs-on: macos-13
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Install Publisher
         run: ./_updatePublisher.sh -f -y
+      - name: Install Jekyll
+        run: gem install jekyll
       - name: Build IG
-        env:
-          DEFAULT_JVM_OPTS: "-Xmx16g -Xms16g"
         run: ./_genonce.sh
+      - name: Install Tooling Jar
+        run: ./_updateCQFTooling.sh -f
+      - name: Refresh Test Data
+        run: ./_refreshTestData.sh
