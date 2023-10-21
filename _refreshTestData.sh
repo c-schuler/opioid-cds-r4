@@ -1,5 +1,5 @@
 #!/bin/bash
-tooling_jar=tooling-cli-2.1.0-SNAPSHOT.jar
+tooling_jar=tooling-cli-2.2.0.jar
 input_cache_path=$PWD/input-cache/
 patient_data_bundles=$PWD/input/examples/
 service_requests=$PWD/input/pagecontent/requests/
