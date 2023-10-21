@@ -1,5 +1,5 @@
 #!/bin/bash
-r=snapshots
+r=releases
 g=org.opencds.cqf
 a=tooling-cli
 v=2.2.0
