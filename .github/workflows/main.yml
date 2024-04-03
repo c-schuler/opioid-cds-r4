@@ -51,4 +51,4 @@ jobs:
       - name: Refresh Bundles
         run: ./_refresh.sh
       - name: Load Terminology Bundle
-        run: curl -X POST '0.0.0.0:8080/fhir' --data-binary @./bundles/plandefinition/opioidcds-01/opioidcds-01-files/valuesets-OpioidCDSREC01-bundle.json
+        run: curl -X POST 'localhost:8080/fhir' --data-binary @./bundles/plandefinition/opioidcds-01/opioidcds-01-files/valuesets-OpioidCDSREC01-bundle.json
