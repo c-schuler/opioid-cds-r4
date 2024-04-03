@@ -4,7 +4,30 @@ on:
     branches: master
 
 jobs:
+  build_ig:
+    runs-on: macos-13
+    outputs:
+      rec01Bundle: ${{ steps.rec01Bundle.outputs }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      # - name: Install Publisher
+      #   run: ./_updatePublisher.sh -f -y
+      # - name: Install Jekyll
+      #   run: gem install jekyll
+      # - name: Build IG
+      #   run: ./_genonce.sh
+      - name: Install Tooling Jar
+        run: ./_updateCQFTooling.sh -f
+      # - name: Refresh Test Data
+      #   run: ./_refreshTestData.sh
+      - name: Refresh Bundles
+        run: ./_refresh.sh
+      - name: Save Rec01 Bundle
+        id: rec01Bundle
+        run: cat ./bundles/opioidcds-01/opioidcds-01-bundle.json >> "$GITHUB_OUTPUT"
   start_cds_service:
+    needs: build_ig
     runs-on: ubuntu-latest
     services:
       nginx:
@@ -14,21 +37,6 @@ jobs:
       ruler:
         image: cschuler72/cqf-ruler
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-  build_ig:
-    needs: start_cds_service
-    runs-on: macos-13
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Install Publisher
-        run: ./_updatePublisher.sh -f -y
-      - name: Install Jekyll
-        run: gem install jekyll
-      - name: Build IG
-        run: ./_genonce.sh
-      - name: Install Tooling Jar
-        run: ./_updateCQFTooling.sh -f
-      - name: Refresh Test Data
-        run: ./_refreshTestData.sh
+      - env:
+          OUTPUT1: ${{needs.build_ig.outputs.rec01Bundle}}
+        run: echo "$OUTPUT1"
