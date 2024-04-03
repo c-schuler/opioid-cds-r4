@@ -1,3 +1,5 @@
+![badge](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/c-schuler/85372d96485a2f5d9d5f100b45374f78/raw/qa-errors.json)
+
 # Clinical Practice Guideline for Prescribing Opioids Implementation Guide (FHIR R4 (4.0.1))
 
 This project is a joint effort by the Centers for Disease Control and Prevention (CDC) and the Office of the National Coordinator for Health IT (ONC) focused on improving processes for the development of standardized, shareable, computable decision support artifacts using the [2022 CDC Clinical Practice Guideline for Prescribing Opioids for Pain](https://www.cdc.gov/mmwr/volumes/71/rr/rr7103a1.htm) as a model case.
