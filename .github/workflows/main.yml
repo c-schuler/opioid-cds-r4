@@ -5,7 +5,6 @@ on:
 
 jobs:
   start_service_build_ig_test:
-    needs: build_ig
     runs-on: macos-13
     services:
       nginx:
