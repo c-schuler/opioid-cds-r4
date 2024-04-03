@@ -9,13 +9,13 @@ jobs:
     services:
       traefik:
         image: "traefik:v2.2"
-        command:
-          - "--log.level=DEBUG"
-          - "--api.insecure=true"
-          - "--providers.docker=true"
-          - "--providers.docker.exposedbydefault=false"
-          - "--entrypoints.web.address=:80"
-          - "--entrypoints.web.forwardedHeaders.insecure=true"
+        # command:
+        #   - "--log.level=DEBUG"
+        #   - "--api.insecure=true"
+        #   - "--providers.docker=true"
+        #   - "--providers.docker.exposedbydefault=false"
+        #   - "--entrypoints.web.address=:80"
+        #   - "--entrypoints.web.forwardedHeaders.insecure=true"
         ports:
           - "80:80"
           - "8080:8080"
