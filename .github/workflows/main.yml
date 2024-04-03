@@ -5,7 +5,7 @@ on:
 
 jobs:
   start_service_build_ig_test:
-    runs-on: macos-13
+    runs-on: ubuntu-latest
     services:
       nginx:
         image: nginx
