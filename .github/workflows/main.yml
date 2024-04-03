@@ -11,6 +11,8 @@ jobs:
         image: nginx
         ports:
           - 8080:80
+        volumes:
+          - "./my_custom_proxy_settings.conf:/etc/nginx/conf.d/my_custom_proxy_settings.conf"
       ruler:
         image: cschuler72/cqf-ruler
     steps:
