@@ -4,7 +4,7 @@ on:
     branches: master
 
 jobs:
-  start_ruler:
+  start_cds_service:
     runs-on: ubuntu-latest
     services:
       nginx:
@@ -13,8 +13,11 @@ jobs:
           - 8080:80
       ruler:
         image: cschuler72/cqf-ruler
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
   build_ig:
-    needs: start_ruler
+    needs: start_cds_service
     runs-on: macos-13
     steps:
       - name: Checkout
