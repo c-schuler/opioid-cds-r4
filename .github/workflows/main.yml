@@ -11,11 +11,13 @@ jobs:
         image: nginx
         ports:
           - 8080:80
-        volumes:
-          - "./my_custom_proxy_settings.conf:/etc/nginx/conf.d/my_custom_proxy_settings.conf"
+        # volumes:
+        #   - "./my_custom_proxy_settings.conf:/etc/nginx/conf.d/my_custom_proxy_settings.conf"
       ruler:
         image: cschuler72/cqf-ruler
     steps:
+      - name: See config
+        run: cat /etc/nginx/conf.d/default.conf
       - name: Checkout
         uses: actions/checkout@v4
       - name: Set up JDK 11 for x64
