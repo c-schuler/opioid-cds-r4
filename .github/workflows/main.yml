@@ -4,51 +4,75 @@ on:
     branches: master
 
 jobs:
-  start_service_build_ig_test:
-    runs-on: ubuntu-latest
-    services:
-      traefik:
-        image: "traefik:v2.2"
-        # command:
-        #   - "--log.level=DEBUG"
-        #   - "--api.insecure=true"
-        #   - "--providers.docker=true"
-        #   - "--providers.docker.exposedbydefault=false"
-        #   - "--entrypoints.web.address=:80"
-        #   - "--entrypoints.web.forwardedHeaders.insecure=true"
-        ports:
-          - 8080:80
-        volumes:
-          - "/var/run/docker.sock:/var/run/docker.sock:ro"
-      # nginx:
-      #   image: nginx
-      #   ports:
-      #     - 8080:80
-      #   volumes:
-      #     - "./my_custom_proxy_settings.conf:/etc/nginx/conf.d/my_custom_proxy_settings.conf"
-      cqf-ruler:
-        image: cschuler72/cqf-ruler
+  build_ig:
+      runs-on: macos-13
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v4
+        # - name: Install Publisher
+        #   run: ./_updatePublisher.sh -f -y
+        # - name: Install Jekyll
+        #   run: gem install jekyll
+        # - name: Build IG
+        #   run: ./_genonce.sh
+        # - name: Install Tooling Jar
+        #   run: ./_updateCQFTooling.sh -f
+        # - name: Refresh Test Data
+        #   run: ./_refreshTestData.sh
+        - name: Create Awesome Badge
+          uses: schneegans/dynamic-badges-action@v1.7.0
+          with:
+            auth: ${{ secrets.GIST_SECRET }}
+            gistID: 85372d96485a2f5d9d5f100b45374f78
+            filename: qa-errors.json 
+            label: Errors
+            message: 1
+            color: red
+  # start_service_build_ig_test:
+  #   runs-on: ubuntu-latest
+  #   services:
+  #     traefik:
+  #       image: "traefik:v2.2"
+  #       # command:
+  #       #   - "--log.level=DEBUG"
+  #       #   - "--api.insecure=true"
+  #       #   - "--providers.docker=true"
+  #       #   - "--providers.docker.exposedbydefault=false"
+  #       #   - "--entrypoints.web.address=:80"
+  #       #   - "--entrypoints.web.forwardedHeaders.insecure=true"
+  #       ports:
+  #         - 8080:80
+  #       volumes:
+  #         - "/var/run/docker.sock:/var/run/docker.sock:ro"
+  #     # nginx:
+  #     #   image: nginx
+  #     #   ports:
+  #     #     - 8080:80
+  #     #   volumes:
+  #     #     - "./my_custom_proxy_settings.conf:/etc/nginx/conf.d/my_custom_proxy_settings.conf"
+  #     cqf-ruler:
+  #       image: cschuler72/cqf-ruler
         
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Set up JDK 11 for x64
-        uses: actions/setup-java@v4
-        with:
-          java-version: '11'
-          distribution: 'temurin'
-          architecture: x64
-      # - name: Install Publisher
-      #   run: ./_updatePublisher.sh -f -y
-      # - name: Install Jekyll
-      #   run: gem install jekyll
-      # - name: Build IG
-      #   run: ./_genonce.sh
-      - name: Install Tooling Jar
-        run: ./_updateCQFTooling.sh -f
-      # - name: Refresh Test Data
-      #   run: ./_refreshTestData.sh
-      - name: Refresh Bundles
-        run: ./_refresh.sh
-      - name: Load Terminology Bundle
-        run: curl -X POST 'localhost:80/fhir' --data-binary @./bundles/plandefinition/opioidcds-01/opioidcds-01-files/valuesets-OpioidCDSREC01-bundle.json
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v4
+  #     - name: Set up JDK 11 for x64
+  #       uses: actions/setup-java@v4
+  #       with:
+  #         java-version: '11'
+  #         distribution: 'temurin'
+  #         architecture: x64
+  #     # - name: Install Publisher
+  #     #   run: ./_updatePublisher.sh -f -y
+  #     # - name: Install Jekyll
+  #     #   run: gem install jekyll
+  #     # - name: Build IG
+  #     #   run: ./_genonce.sh
+  #     - name: Install Tooling Jar
+  #       run: ./_updateCQFTooling.sh -f
+  #     # - name: Refresh Test Data
+  #     #   run: ./_refreshTestData.sh
+  #     - name: Refresh Bundles
+  #       run: ./_refresh.sh
+  #     - name: Load Terminology Bundle
+  #       run: curl -X POST 'localhost:80/fhir' --data-binary @./bundles/plandefinition/opioidcds-01/opioidcds-01-files/valuesets-OpioidCDSREC01-bundle.json
