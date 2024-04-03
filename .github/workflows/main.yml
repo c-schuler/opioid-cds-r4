@@ -10,7 +10,7 @@ jobs:
       nginx:
         image: jwilder/nginx-proxy
         ports:
-          - 80:80
+          - 8080:80
         volumes:
           - "./my_custom_proxy_settings.conf:/etc/nginx/conf.d/my_custom_proxy_settings.conf"
       ruler:
