@@ -25,7 +25,7 @@ jobs:
         run: ./_refresh.sh
       - name: Save Rec01 Bundle
         id: rec01Bundle
-        run: cat ./bundles/opioidcds-01/opioidcds-01-bundle.json >> "$GITHUB_OUTPUT"
+        run: cat ./bundles/plandefinition/opioidcds-01/opioidcds-01-bundle.json >> "$GITHUB_OUTPUT"
   start_cds_service:
     needs: build_ig
     runs-on: ubuntu-latest
