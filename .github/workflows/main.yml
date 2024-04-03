@@ -4,10 +4,16 @@ on:
     branches: master
 
 jobs:
-  build_ig:
+  start_service_build_ig_test:
+    needs: build_ig
     runs-on: macos-13
-    outputs:
-      rec01Bundle: ${{ steps.rec01Bundle.outputs }}
+    services:
+      nginx:
+        image: nginx
+        ports:
+          - 8080:80
+      ruler:
+        image: cschuler72/cqf-ruler
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -23,20 +29,5 @@ jobs:
       #   run: ./_refreshTestData.sh
       - name: Refresh Bundles
         run: ./_refresh.sh
-      - name: Save Rec01 Bundle
-        id: rec01Bundle
-        run: cat ./bundles/plandefinition/opioidcds-01/opioidcds-01-bundle.json >> "$GITHUB_OUTPUT"
-  start_cds_service:
-    needs: build_ig
-    runs-on: ubuntu-latest
-    services:
-      nginx:
-        image: nginx
-        ports:
-          - 8080:80
-      ruler:
-        image: cschuler72/cqf-ruler
-    steps:
-      - env:
-          OUTPUT1: ${{needs.build_ig.outputs.rec01Bundle}}
-        run: echo "$OUTPUT1"
+      - name: Output Rec01 Bundle
+        run: cat ./bundles/plandefinition/opioidcds-01/opioidcds-01-bundle.json 
