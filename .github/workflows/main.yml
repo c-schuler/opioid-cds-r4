@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     services:
       nginx:
-        image: nginxproxy/nginx-proxy
+        image: nginx
         ports:
           - 8080:80
       ruler:
