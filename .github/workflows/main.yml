@@ -35,4 +35,4 @@ jobs:
       - name: Refresh Bundles
         run: ./_refresh.sh
       - name: Load Rec01 Bundle
-        run: curl --location --request POST '127.0.0.1:8080/fhir' --header 'Content-Type: application/json' --data-binary @./bundles/plandefinition/opioidcds-01/opioidcds-01-bundle.json 
+        run: curl -X POST '127.0.0.1:8080/fhir' --data-binary @./bundles/plandefinition/opioidcds-01/opioidcds-01-bundle.json 
