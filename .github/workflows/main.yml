@@ -4,21 +4,6 @@ on:
     branches: master
 
 jobs:
-  build_ig:
-    runs-on: macos-13
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      # - name: Install Publisher
-      #   run: ./_updatePublisher.sh -f -y
-      # - name: Install Jekyll
-      #   run: gem install jekyll
-      # - name: Build IG
-      #   run: ./_genonce.sh
-      - name: Install Tooling Jar
-        run: ./_updateCQFTooling.sh -f
-      - name: Refresh Test Data
-        run: ./_refreshTestData.sh
   start_ruler:
     runs-on: ubuntu-latest
     services:
@@ -28,8 +13,19 @@ jobs:
           - 8080:80
       ruler:
         image: cschuler72/cqf-ruler
+  build_ig:
+    needs: start_ruler
+    runs-on: macos-13
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Install Publisher
         run: ./_updatePublisher.sh -f -y
+      - name: Install Jekyll
+        run: gem install jekyll
+      - name: Build IG
+        run: ./_genonce.sh
       - name: Install Tooling Jar
         run: ./_updateCQFTooling.sh -f
+      - name: Refresh Test Data
+        run: ./_refreshTestData.sh
