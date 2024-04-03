@@ -7,14 +7,35 @@ jobs:
   start_service_build_ig_test:
     runs-on: ubuntu-latest
     services:
-      nginx:
-        image: nginx
+      traefik:
+        image: "traefik:v2.2"
+        command:
+          - "--log.level=DEBUG"
+          - "--api.insecure=true"
+          - "--providers.docker=true"
+          - "--providers.docker.exposedbydefault=false"
+          - "--entrypoints.web.address=:80"
+          - "--entrypoints.web.forwardedHeaders.insecure=true"
         ports:
-          - 8080:80
+          - "80:80"
+          - "8080:8080"
         volumes:
-          - "./my_custom_proxy_settings.conf:/etc/nginx/conf.d/my_custom_proxy_settings.conf"
-      ruler:
+          - "/var/run/docker.sock:/var/run/docker.sock:ro"
+        labels:
+          - "traefik.enable=true"
+      # nginx:
+      #   image: nginx
+      #   ports:
+      #     - 8080:80
+      #   volumes:
+      #     - "./my_custom_proxy_settings.conf:/etc/nginx/conf.d/my_custom_proxy_settings.conf"
+      cqf-ruler:
         image: cschuler72/cqf-ruler
+        ports: 
+          - "8080"
+        labels:
+          - "traefik.enable=true"
+        
     steps:
       - name: Checkout
         uses: actions/checkout@v4
