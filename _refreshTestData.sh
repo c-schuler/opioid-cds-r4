@@ -1,14 +1,12 @@
 #!/bin/bash
-#DO NOT EDIT WITH WINDOWS
-tooling_jar=tooling-cli-2.1.0-SNAPSHOT.jar
-# tooling_jar=tooling-1.4.1-SNAPSHOT-jar-with-dependencies.jar
-input_cache_path=$PWD/input-cache
-patient_data_bundles=$PWD/input/examples
-service_requests=$PWD/input/pagecontent/requests
+tooling_jar=tooling-cli-2.2.0.jar
+input_cache_path=$PWD/input-cache/
+patient_data_bundles=$PWD/input/examples/
+service_requests=$PWD/input/pagecontent/requests/
 
 echo Refreshing Test Data...
 
-tooling=$input_cache_path/$tooling_jar
+tooling=$input_cache_path$tooling_jar
 if test -f "$tooling"; then
     JAVA -jar $tooling -RollTestsDataDates -v=r4 -ip="$patient_data_bundles"
     JAVA -jar $tooling -RollTestsDataDates -v=r4 -ip="$service_requests"

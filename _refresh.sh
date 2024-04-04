@@ -1,7 +1,7 @@
 #!/bin/bash
 #DO NOT EDIT WITH WINDOWS
 # tooling_jar=tooling-1.4.1-SNAPSHOT-jar-with-dependencies.jar
-tooling_jar=tooling-cli-2.1.0-SNAPSHOT.jar
+tooling_jar=tooling-cli-2.2.0.jar
 input_cache_path=$PWD/input-cache
 resources_path=/input/resources
 ig_ini_path=$PWD/ig.ini
@@ -23,13 +23,13 @@ echo "$fsoption"
 
 tooling=$input_cache_path/$tooling_jar
 if test -f "$tooling"; then
-	JAVA -jar $tooling -RefreshIG -ini="$ig_ini_path" -rp="$resources_path" -d -p -t -ss=false $fsoption
+	java -jar $tooling -RefreshIG -ini="$ig_ini_path" -rp="$resources_path" -d -p -t -ss=false $fsoption
 	chmod +x ./_refreshTestData.sh
 else
 	tooling=../$tooling_jar
 	echo $tooling
 	if test -f "$tooling"; then
-		JAVA -jar $tooling -RefreshIG -ini="$ig_ini_path" -rp="$resources_path" -d -p -t -ss=false $fsoption
+		java -jar $tooling -RefreshIG -ini="$ig_ini_path" -rp="$resources_path" -d -p -t -ss=false $fsoption
 		chmod +x ./_refreshTestData.sh
 	else
 		echo IG Refresh NOT FOUND in input-cache or parent folder.  Please run _updateCQFTooling.  Aborting...
