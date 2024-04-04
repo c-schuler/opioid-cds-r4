@@ -6,27 +6,34 @@ on:
 jobs:
   build_ig:
       runs-on: macos-13
+      outputs:
+        qa-errors: ${{ steps.qa-error.outputs }}
       steps:
         - name: Checkout
           uses: actions/checkout@v4
-        # - name: Install Publisher
-        #   run: ./_updatePublisher.sh -f -y
-        # - name: Install Jekyll
-        #   run: gem install jekyll
-        # - name: Build IG
-        #   run: ./_genonce.sh
+        - name: Install Publisher
+          run: ./_updatePublisher.sh -f -y
+        - name: Install Jekyll
+          run: gem install jekyll
+        - name: Build IG
+          run: ./_genonce.sh
         # - name: Install Tooling Jar
         #   run: ./_updateCQFTooling.sh -f
         # - name: Refresh Test Data
         #   run: ./_refreshTestData.sh
+        - name: Get QA Errors
+          id: qa-error
+          run: jq -r '.errs' ./output/qa.json >> "$GITHUB_OUTPUT"
         - name: Create Awesome Badge
+          env:
+            MESSAGE: ${{ steps.qa-error.outputs }}
           uses: schneegans/dynamic-badges-action@v1.7.0
           with:
             auth: ${{ secrets.GIST_SECRET }}
             gistID: 85372d96485a2f5d9d5f100b45374f78
             filename: qa-errors.json 
             label: Errors
-            message: 1
+            message: "$MESSAGE"
             color: red
   # start_service_build_ig_test:
   #   runs-on: ubuntu-latest
